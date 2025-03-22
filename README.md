@@ -17,13 +17,13 @@ This Python project simulates the children's card game called [War](https://en.w
 Clone the repository:
 
 ```sh
-git clone https://github.com/username/war.git
+git clone https://github.com/justinasbaleisa/TC-jbalei-WD.1.3.4.git
 ```
 
 Navigate to the project directory:
 
 ```sh
-cd war
+cd TC-jbalei-WD.1.3.4
 ```
 
 ## Usage
