@@ -6,7 +6,7 @@ from models.card import Card
 class Deck:
 
     def __init__(self):
-        self.cards = [
+        self.cards: list = [
             Card(rank, suit) for rank in Card.RANKS for suit in Card.SUITS
         ]
 
@@ -15,7 +15,7 @@ class Deck:
 
     def __contains__(self, card):
         return card in self.cards
-    
+
     def shuffle(self):
         shuffle(self.cards)
 
@@ -24,7 +24,7 @@ class Deck:
         second_hand = []
         shift = True
         if len(self.cards) <= 0:
-            raise ValueError(f"Not enough '{len(self.cards)}' cards in Deck to deal.")
+            raise ValueError(f"Not enough '{len(self.cards)}' cards in Deck to deal")
         while self.cards:
             card = self.cards.pop(0)
             if shift:

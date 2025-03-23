@@ -1,42 +1,36 @@
+from models.hand import Hand
+
+
 class Player:
-    """
-    Represents a player in the game.
-    """
 
-    def __init__(self, name, hand):
-        """
-        Initialize a player with a name and a hand of cards.
-
-        Args:
-            name (str): The player's name.
-            hand (Hand): The player's initial collection of cards.
-        """
-        self.name = name
+    def __init__(self, name: str, hand: Hand = None):
         self.hand = hand
-
-    def play_card(self):
-        """
-        Draw and play the top card from the player's hand.
-        """
-        pass
-
-    def add_cards(self, new_cards):
-        """
-        Add won cards to the player's hand.
-
-        Args:
-            new_cards (list[Card]): The new cards to be added.
-        """
-        pass
-
-    def has_cards(self):
-        """
-        Check if the player still has cards left to play.
-        """
-        pass
+        self.name = name
 
     def __str__(self):
-        """
-        Return the player's name.
-        """
-        pass
+        return (
+            f"Player: {self.name}, with {len(self.hand.cards)} cards:\n"
+            f"- {'\n- '.join(str(card) for card in self.hand.cards)}"
+        )
+
+    @property
+    def hand(self):
+        return self._hand
+
+    @hand.setter
+    def hand(self, value: Hand):
+        if isinstance(value, Hand):
+            self._hand = value
+            return
+        raise ValueError(f"Invalid hand '{value}' of type '{type(value).__name__}'")
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value: str):
+        if isinstance(value, str) and value.strip():
+            self._name = value
+            return
+        raise ValueError(f"Invalid name '{value}' of type '{type(value).__name__}'")

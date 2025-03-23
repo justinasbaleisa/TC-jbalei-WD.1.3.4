@@ -150,22 +150,50 @@ Task description: [https://intra.turingcollege.com/hardskills/wd-1-3-4](https://
    - Create initial repository structure.
    - Add a `README.md` file with project description and requirements.
 2. **Create Card Class**
-   - Define the `Card` class with attributes: rank, suit, value, and ascii_suit.
-   - Implement `__init__`, `__str__`, and comparison methods (`__eq__`, `__lt__`).
+   - Define the `Card` class with:
+     - parameters with getters and setters: `rank`, `suit`,
+     - attributes: `value`, `ascii`,
+     - dunder methods:
+       - initialization and construction `__init__`,
+       - string `__str__`,
+       - comparison `__eq__`, `__lt__`, `__hash__`.
 3. **Create Deck Class**
-   - Define the `Deck` class to manage a collection of Card objects.
-   - Implement `__init__`, `shuffle`, and `__str__` methods.
+   - Define the `Deck` class with:
+     - parameters with getters and setters: `None`,
+     - attribues: `cards`,
+     - dunder methods:
+       - initialization and construction `__init__`,
+       - string `__str__`,
+       - comparison `__contains__`.
+     - methods: `shuffle`, `deal`.
 4. **Implement Deal Method in Deck Class**
    - Implement the `deal` method to distribute cards evenly between two players.
 5. **Create Hand Class**
-   - Define the `Hand` class to manage a player's collection of cards.
-   - Implement methods `__init__`, `add_cards`, `play_card`, and `has_cards`.
+   - Define the `Hand` class with:
+     - parameters with getters and setters: `cards`,
+     - attribues: `None`,
+     - dunder methods:
+       - initialization and construction `__init__`,
+       - string `__str__`,
+       - comparison `__contains__`.
+     - methods: `add_cards`, `play_card`.
+   - Implement the `add_cards` method to append players card list from the bottom, and `play_card` method to play the card from the top of the list.
 6. **Create Player Class**
-   - Define the `Player` class to represent a player in the game.
-   - Implement methods `__init__`, `play_card`, `add_cards`, `has_cards`, and `__str__`.
+   - Define the `Player` class with:
+     - parameters with getters and setters: `hand`, `name`,
+     - attribues: `None`,
+     - dunder methods:
+       - initialization and construction `__init__`,
+       - string `__str__`.
+     - methods: `None`.
 7. **Create Round Class**
-   - Define the `Round` class to simulate a single round of the game.
-   - Implement methods `__init__`, `play`, and `handle_war`.
+   - Define the `Round` class to simulate a single round of the game with:
+     - parameters with getters and setters: `player_1`, `player_2` (or list of players),
+     - attribues: `None`,
+     - dunder methods:
+       - initialization and construction `__init__`,
+     - methods: `play`, `handle_war`.
+   - Implement the `play` method to simulate one round of play (play card, compare, values, determine winner or tie to initiate war), and `handle_war` method to invoke war resolution if the played cards are tie.
 8. **Create War Class**
    - Define the `War` class to handle tie situations.
    - Implement methods `__init__`, `resolve`, and `recursive_war`.
