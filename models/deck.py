@@ -1,6 +1,8 @@
 from random import shuffle
 
 from models.card import Card
+from models.hand import Hand
+from models.player import Player
 
 
 class Deck:
@@ -16,20 +18,29 @@ class Deck:
     def __contains__(self, card):
         return card in self.cards
 
-    def shuffle(self):
+    @property
+    def capacity(self):
+        return len(Card.RANKS) * len(Card.SUITS)
+
+    @property
+    def cards_left(self):
+        return len(self.cards)
+
+    def shuffle(self) -> None:
         shuffle(self.cards)
 
-    def deal(self):
-        first_hand = []
-        second_hand = []
-        shift = True
+    def deal(self, quantity: int) -> None:
         if len(self.cards) <= 0:
-            raise ValueError(f"Not enough '{len(self.cards)}' cards in Deck to deal")
-        while self.cards:
-            card = self.cards.pop(0)
-            if shift:
-                first_hand.append(card)
-            else:
-                second_hand.append(card)
-            shift = not shift
-        return first_hand, second_hand
+            raise ValueError(
+                f"Not enough cards. "
+                f"Deck is epmpty"
+            )
+        if len(self.cards) < quantity:
+            raise ValueError(
+                f"Not enough cards. "
+                f"Deck has '{len(self.cards)}', "
+                f"but requested '{quantity}' cards"
+        )
+        dealt_cards = self.cards[:quantity]
+        self.cards = self.cards[quantity:]
+        return dealt_cards

@@ -18,6 +18,13 @@ class Hand:
 
     @cards.setter
     def cards(self, value: Card | list[Card]):
+        self._cards = self.validate(value)
+
+    @property
+    def has_cards(self):
+        return bool(self.cards)
+    
+    def validate(self, value: Card | list[Card]):
         if isinstance(value, Card):
             value = [value]
         elif not isinstance(value, list):
@@ -48,23 +55,14 @@ class Hand:
                 f"to add '{new_cards_count}' more, "
                 f"already '{present_cards_count}' are in"
             )
-
-        self._cards = value
+        return value
 
     def add_cards(self, new_cards: Card | list[Card]) -> None:
-        if isinstance(new_cards, Card):
-            new_cards = [new_cards]
+        new_cards = self.validate(new_cards)
+        self.cards.extend(new_cards)
 
-        if not isinstance(new_cards, list):
-            raise ValueError(
-                f"Invalid card '{new_cards}' " f"of type '{type(new_cards).__name__}'"
-            )
-
-        # HACK This way to assign for Setter to be called and validate
-        self.cards = self.cards + new_cards
-
-    def play_card(self) -> Card:
-        if self.cards:
-            return self.cards.pop(0)
+    def play_card(self, quantity: int = 1) -> list[Card]:
+        if len(self.cards) >= quantity:
+            return [self.cards.pop(0) for _ in range(quantity)]
         else:
-            raise ValueError("Cannot play a card from an empty hand")
+            raise ValueError(f"Cannot play a card. Hand has '{len(self.cards)}', but requested '{quantity}' cards")

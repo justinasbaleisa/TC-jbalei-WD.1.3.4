@@ -1,20 +1,23 @@
+import sys
+
 from managers.game import Game
-from utils.logger import Logger
 
 
 def main() -> None:
-    game = Game()
-    logger = Logger()
+    try:
+        game = Game()
+        game.play_game()
 
-    while not game.is_game_over():
-        logger.log("WarGame: starting round")
-        game.play_round()
-        logger.log("WarGame: round completed")
-
-    game.declare_winner()
-    logger.log("WarGame: declared winner")
-    logger.save_to_file()
-
+    except EOFError:
+        print(f"\nFINISHED.")
+        if input("Do you want to restart? (y/n): ").lower() == "y":
+            main()
+        else:
+            sys.exit(0)
+        
+    except Exception as e:
+        print(f"WarGame error: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

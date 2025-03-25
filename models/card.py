@@ -22,7 +22,6 @@ class Card:
         "Spades": {"ascii": "♠"},
     }
     VALUES = {rank: index + 2 for index, rank in enumerate(RANKS)}
-    ASCII = {rank: }
 
     def __init__(self, rank: str, suit: str):
         self.rank = rank
